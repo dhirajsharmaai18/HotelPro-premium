@@ -1,41 +1,43 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
+<meta name="theme-color" content="#0a0a0a">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>HotelPro</title>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@500;600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f4f4ef;--sf:#fff;--ink:#14282e;--mut:#5b6d72;--ln:#d9ddd6;--ac:#0f5a63;--on:#fff;--br:#a8731a;--ok:#2b7a4d;--wn:#b4531f;--bad:#a8323a;--tag:#efe6d2;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1b1f;--sf:#15262b;--ink:#e8eeec;--mut:#93a6aa;--ln:#27393e;--ac:#4fb3bf;--on:#07191d;--br:#d9a54a;--ok:#5cc08a;--wn:#e58a55;--bad:#e5757c;--tag:#2a2a1f;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0e1b1f;--sf:#15262b;--ink:#e8eeec;--mut:#93a6aa;--ln:#27393e;--ac:#4fb3bf;--on:#07191d;--br:#d9a54a;--ok:#5cc08a;--wn:#e58a55;--bad:#e5757c;--tag:#2a2a1f;color-scheme:dark}
+:root{--bg:#0a0a0a;--sf:#141311;--ink:#f3ecd8;--mut:#a89f86;--ln:#2e2a1c;--ac:#c9a227;--on:#0a0a0a;--br:#e8c765;--gd:#8f7318;--ok:#6fc496;--wn:#e8944f;--bad:#ef7b82;--tag:#2a2411;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *,*:before,*:after{box-sizing:inherit}
 html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font:15px/1.5 Figtree,system-ui,sans-serif}
 h1,h2,h3{font-family:Newsreader,Georgia,serif;font-weight:600;margin:0}
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer;border:1px solid var(--ln);background:var(--sf);border-radius:6px;padding:7px 12px}
-button.p{background:var(--ac);color:var(--on);border-color:var(--ac);font-weight:600}
+button:hover{border-color:var(--ac)}
+button.p{background:linear-gradient(135deg,var(--br),var(--ac) 55%,var(--gd));color:var(--on);border-color:var(--ac);font-weight:600}
+button.p:hover{filter:brightness(1.1)}
 button.d{color:var(--bad)}
 button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--br);outline-offset:2px}
 input,select{width:100%;padding:8px 10px;border:1px solid var(--ln);border-radius:6px;background:var(--sf)}
 label{display:block;font-size:13px;color:var(--mut);margin:10px 0 3px}
-.login{max-width:380px;margin:12vh auto;padding:28px;background:var(--sf);border:1px solid var(--ln);border-radius:10px}
-.login h1{font-size:34px}.login p{color:var(--mut);margin:4px 0 8px}
+.login{max-width:380px;margin:12vh auto;padding:28px;background:var(--sf);border:1px solid var(--gd);border-radius:10px;box-shadow:0 0 40px rgba(201,162,39,.12)}
+.login h1{font-size:34px;color:var(--ac)}.login p{color:var(--mut);margin:4px 0 8px}
 .shell{display:grid;grid-template-columns:200px 1fr;min-height:100vh}
-nav{background:var(--ac);color:var(--on);padding:20px 14px;display:flex;flex-direction:column;gap:4px}
-nav h1{font-size:26px;margin-bottom:18px;padding-left:10px}
+nav{background:#000;color:var(--br);border-right:1px solid var(--gd);padding:20px 14px;display:flex;flex-direction:column;gap:4px}
+nav h1{font-size:26px;margin-bottom:18px;padding-left:10px;color:var(--ac);letter-spacing:.5px}
 nav button{background:none;border:0;color:inherit;text-align:left;padding:9px 10px;opacity:.8}
-nav button.on{background:rgba(255,255,255,.16);opacity:1;font-weight:600}
+nav button:hover{border:0;opacity:1}
+nav button.on{background:rgba(201,162,39,.16);box-shadow:inset 3px 0 0 var(--ac);opacity:1;font-weight:600}
 nav .sp{flex:1}
 nav small{padding-left:10px;opacity:.8}
 main{padding:24px;min-width:0}
 .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-.top h2{font-size:30px}
+.top h2{font-size:30px;color:var(--br)}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px}
 .st{background:var(--sf);border:1px solid var(--ln);border-radius:8px;padding:14px}
-.st b{display:block;font:600 28px Newsreader,serif}.st span{color:var(--mut);font-size:13px}
+.st b{display:block;font:600 28px Newsreader,serif;color:var(--br)}.st span{color:var(--mut);font-size:13px}
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
 .box{background:var(--sf);border:1px solid var(--ln);border-radius:8px;padding:16px;min-width:0}
-.box h3{font-size:20px;margin-bottom:8px}
+.box h3{font-size:20px;margin-bottom:8px;color:var(--br)}
 .row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--ln)}
 .row:first-of-type{border-top:0}
 .mut{color:var(--mut);font-size:13px}
@@ -50,13 +52,14 @@ table{border-collapse:collapse;width:100%;min-width:640px}
 th,td{text-align:left;padding:9px 8px;border-top:1px solid var(--ln);vertical-align:middle}
 th{font-size:13px;color:var(--mut);font-weight:500;border-top:0}
 td .a{display:flex;gap:6px;flex-wrap:wrap}
-dialog{border:1px solid var(--ln);border-radius:10px;background:var(--sf);color:var(--ink);width:min(440px,92vw);padding:22px}
-dialog::backdrop{background:rgba(0,0,0,.45)}
+dialog{border:1px solid var(--gd);border-radius:10px;background:var(--sf);color:var(--ink);width:min(440px,92vw);padding:22px}
+dialog::backdrop{background:rgba(0,0,0,.7)}
+dialog h3{color:var(--br)}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .acts{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
-#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:8px;display:none;z-index:9}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ac);color:var(--on);font-weight:600;padding:9px 16px;border-radius:8px;display:none;z-index:9}
 .err{color:var(--bad);font-size:13px;min-height:18px;margin-top:8px}
-@media(max-width:720px){.shell{grid-template-columns:1fr}nav{flex-direction:row;flex-wrap:wrap;align-items:center;padding:10px}nav h1{margin:0 8px 0 0}nav .sp,nav small{display:none}main{padding:16px}}
+@media(max-width:720px){.shell{grid-template-columns:1fr}nav{border-right:0;border-bottom:1px solid var(--gd);flex-direction:row;flex-wrap:wrap;align-items:center;padding:10px}nav h1{margin:0 8px 0 0}nav .sp,nav small{display:none}main{padding:16px}}
 </style></head>
 <body>
 <div id="app"></div><dialog id="dlg"></dialog><div id="toast" role="status"></div>
