@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HotelPro</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@500;600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f4ef;--sf:#fff;--ink:#14282e;--mut:#5b6d72;--ln:#d9ddd6;--ac:#0f5a63;--on:#fff;--br:#a8731a;--ok:#2b7a4d;--wn:#b4531f;--bad:#a8323a;--tag:#efe6d2;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1b1f;--sf:#15262b;--ink:#e8eeec;--mut:#93a6aa;--ln:#27393e;--ac:#4fb3bf;--on:#07191d;--br:#d9a54a;--ok:#5cc08a;--wn:#e58a55;--bad:#e5757c;--tag:#2a2a1f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1b1f;--sf:#15262b;--ink:#e8eeec;--mut:#93a6aa;--ln:#27393e;--ac:#4fb3bf;--on:#07191d;--br:#d9a54a;--ok:#5cc08a;--wn:#e58a55;--bad:#e5757c;--tag:#2a2a1f;color-scheme:dark}
+*,*:before,*:after{box-sizing:inherit}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 Figtree,system-ui,sans-serif}
+h1,h2,h3{font-family:Newsreader,Georgia,serif;font-weight:600;margin:0}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;border:1px solid var(--ln);background:var(--sf);border-radius:6px;padding:7px 12px}
+button.p{background:var(--ac);color:var(--on);border-color:var(--ac);font-weight:600}
+button.d{color:var(--bad)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--br);outline-offset:2px}
+input,select{width:100%;padding:8px 10px;border:1px solid var(--ln);border-radius:6px;background:var(--sf)}
+label{display:block;font-size:13px;color:var(--mut);margin:10px 0 3px}
+.login{max-width:380px;margin:12vh auto;padding:28px;background:var(--sf);border:1px solid var(--ln);border-radius:10px}
+.login h1{font-size:34px}.login p{color:var(--mut);margin:4px 0 8px}
+.shell{display:grid;grid-template-columns:200px 1fr;min-height:100vh}
+nav{background:var(--ac);color:var(--on);padding:20px 14px;display:flex;flex-direction:column;gap:4px}
+nav h1{font-size:26px;margin-bottom:18px;padding-left:10px}
+nav button{background:none;border:0;color:inherit;text-align:left;padding:9px 10px;opacity:.8}
+nav button.on{background:rgba(255,255,255,.16);opacity:1;font-weight:600}
+nav .sp{flex:1}
+nav small{padding-left:10px;opacity:.8}
+main{padding:24px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.top h2{font-size:30px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px}
+.st{background:var(--sf);border:1px solid var(--ln);border-radius:8px;padding:14px}
+.st b{display:block;font:600 28px Newsreader,serif}.st span{color:var(--mut);font-size:13px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.box{background:var(--sf);border:1px solid var(--ln);border-radius:8px;padding:16px;min-width:0}
+.box h3{font-size:20px;margin-bottom:8px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--ln)}
+.row:first-of-type{border-top:0}
+.mut{color:var(--mut);font-size:13px}
+.rooms{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.rm{background:var(--sf);border:1px solid var(--ln);border-top:5px solid var(--ok);border-radius:8px;padding:12px}
+.rm.occ{border-top-color:var(--bad)}.rm.res{border-top-color:var(--br)}
+.rm b{display:inline-block;background:var(--tag);color:var(--br);border-radius:4px;padding:1px 8px;font:600 18px Newsreader,serif}
+.pill{font-size:12px;border-radius:99px;padding:2px 9px;border:1px solid currentColor;white-space:nowrap}
+.reserved{color:var(--br)}.in{color:var(--bad)}.out{color:var(--ok)}.cancelled{color:var(--mut)}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{text-align:left;padding:9px 8px;border-top:1px solid var(--ln);vertical-align:middle}
+th{font-size:13px;color:var(--mut);font-weight:500;border-top:0}
+td .a{display:flex;gap:6px;flex-wrap:wrap}
+dialog{border:1px solid var(--ln);border-radius:10px;background:var(--sf);color:var(--ink);width:min(440px,92vw);padding:22px}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.acts{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:8px;display:none;z-index:9}
+.err{color:var(--bad);font-size:13px;min-height:18px;margin-top:8px}
+@media(max-width:720px){.shell{grid-template-columns:1fr}nav{flex-direction:row;flex-wrap:wrap;align-items:center;padding:10px}nav h1{margin:0 8px 0 0}nav .sp,nav small{display:none}main{padding:16px}}
+</style></head>
+<body>
+<div id="app"></div><dialog id="dlg"></dialog><div id="toast" role="status"></div>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const inr=n=>'₹'+Math.round(n).toLocaleString('en-IN');
+const iso=d=>{const x=new Date(d);return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')};
+const add=n=>{const d=new Date();d.setDate(d.getDate()+n);return iso(d)};
+const today=()=>iso(new Date());
+const nights=(a,b)=>Math.max(1,Math.round((new Date(b)-new Date(a))/864e5));
+const TYPES={Standard:2800,Deluxe:4200,Suite:7500};
+const ROOMS=[];[['Standard',1,6],['Deluxe',2,6],['Suite',3,4]].forEach(([t,f,c])=>{for(let i=1;i<=c;i++)ROOMS.push({n:f*100+i,type:t,rate:TYPES[t]})});
+const USERS={admin:{pw:'admin123',role:'Manager'},desk:{pw:'desk123',role:'Front desk'}};
+const KEY='hotelpro-v1';
+let S={user:null,view:'Dashboard',q:'',bk:[]};
+function seed(){const m=(id,g,p,e,r,a,b,st,paid)=>({id,guest:g,phone:p,email:e,room:r,in:add(a),out:add(b),status:st,paid,total:ROOMS.find(x=>x.n==r).rate*nights(add(a),add(b))});
+return[m(1,'Aarav Sharma','98260 11122','aarav@example.com',101,-1,2,'in',2800),m(2,'Meera Iyer','98930 22211','meera@example.com',202,0,3,'reserved',0),m(3,'Rohan Verma','94250 33345','rohan@example.com',301,-2,1,'in',15000),m(4,'Sana Khan','97550 44456','sana@example.com',203,1,3,'reserved',4200),m(5,'Dev Patel','99810 55567','dev@example.com',104,-4,-1,'out',8400)]}
+function load(){try{const r=localStorage.getItem(KEY);if(r){S.bk=JSON.parse(r);return}}catch(e){}S.bk=seed()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S.bk))}catch(e){}}
+function toast(t){const e=$('#toast');e.textContent=t;e.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display='none',2400)}
+const sha=async s=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+async function login(){const u=$('#u').value.trim().toLowerCase(),p=$('#p').value;const acct=USERS[u];
+let ok=false;if(acct){try{ok=(await sha(p))===(await sha(acct.pw))}catch(e){ok=p===acct.pw}}
+if(!ok){$('#err').textContent='Username or password is incorrect.';return}
+S.user={name:u,role:acct.role};S.view='Dashboard';render()}
+const free=(room,a,b,skip)=>!S.bk.some(x=>x.room==room&&x.id!==skip&&x.status!=='cancelled'&&x.status!=='out'&&x.in<b&&a<x.out);
+const bal=b=>b.total-b.paid;
+function roomState(n){const t=today();const b=S.bk.find(x=>x.room==n&&(x.status==='in'||(x.status==='reserved'&&x.in<=t&&t<x.out)));return b?(b.status==='in'?'occ':'res'):'vac'}
+function render(){const A=$('#app');
+if(!S.user){A.innerHTML=`<div class="login"><h1>HotelPro</h1><p>Sign in to manage bookings, guests and payments.</p>
+<label for="u">Username</label><input id="u" autocomplete="username" value="admin"><label for="p">Password</label><input id="p" type="password" autocomplete="current-password" value="admin123">
+<div class="err" id="err"></div><button class="p" style="width:100%;margin-top:6px" id="li">Sign in</button>
+<p class="mut" style="margin-top:14px">Demo accounts: admin / admin123 (Manager), desk / desk123 (Front desk).</p></div>`;
+$('#li').onclick=login;$('#p').onkeydown=e=>{if(e.key==='Enter')login()};return}
+const tabs=['Dashboard','Rooms','Bookings','Guests'].concat(S.user.role==='Manager'?['Payments']:[]);
+if(!tabs.includes(S.view))S.view='Dashboard';
+A.innerHTML=`<div class="shell"><nav><h1>HotelPro</h1>${tabs.map(t=>`<button data-v="${t}" class="${t===S.view?'on':''}">${t}</button>`).join('')}<div class="sp"></div><small>${esc(S.user.name)} · ${S.user.role}</small><button id="out">Sign out</button></nav><main>${V[S.view]()}</main></div>`;
+A.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{S.view=b.dataset.v;S.q='';render()});
+$('#out').onclick=()=>{S.user=null;render()};
+A.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>act(b.dataset.a,+b.dataset.id));
+const nb=$('#nb');if(nb)nb.onclick=bookDlg;const q=$('#q');if(q){q.oninput=()=>{S.q=q.value;const p=q.selectionStart;render();const n=$('#q');n.focus();n.setSelectionRange(p,p)}}}
+const pill=s=>`<span class="pill ${s}">${{reserved:'Reserved',in:'Checked in',out:'Checked out',cancelled:'Cancelled'}[s]}</span>`;
+const btns=b=>`<div class="a">${b.status==='reserved'?`<button data-a="in" data-id="${b.id}">Check in</button>`:''}${b.status==='in'?`<button data-a="out" data-id="${b.id}">Check out</button>`:''}${b.status!=='cancelled'&&bal(b)>0?`<button data-a="pay" data-id="${b.id}">Take payment</button>`:''}${b.status==='reserved'?`<button class="d" data-a="cancel" data-id="${b.id}">Cancel</button>`:''}</div>`;
+const V={
+Dashboard(){const t=today(),occ=ROOMS.filter(r=>roomState(r.n)==='occ').length,arr=S.bk.filter(b=>b.status==='reserved'&&b.in<=t&&t<b.out),inh=S.bk.filter(b=>b.status==='in'),dep=inh.filter(b=>b.out<=t);
+const col=S.bk.filter(b=>b.status!=='cancelled').reduce((s,b)=>s+b.paid,0),due=S.bk.filter(b=>b.status==='in'||b.status==='out').reduce((s,b)=>s+bal(b),0);
+const list=(a,e)=>a.length?a.map(b=>`<div class="row"><div><b>${esc(b.guest)}</b><div class="mut">Room ${b.room} · until ${b.out}</div></div>${btns(b)}</div>`).join(''):`<p class="mut">${e}</p>`;
+return`<div class="top"><h2>Today at the desk</h2><button class="p" id="nb">New booking</button></div>
+<div class="stats"><div class="st"><b>${Math.round(occ/ROOMS.length*100)}%</b><span>${occ} of ${ROOMS.length} rooms occupied</span></div><div class="st"><b>${arr.length}</b><span>Arrivals waiting</span></div><div class="st"><b>${dep.length}</b><span>Departures due</span></div>${S.user.role==='Manager'?`<div class="st"><b>${inr(col)}</b><span>Collected</span></div><div class="st"><b>${inr(due)}</b><span>Outstanding on stays</span></div>`:''}</div>
+<div class="two"><div class="box"><h3>Arrivals</h3>${list(arr,'No arrivals waiting.')}</div><div class="box"><h3>In house</h3>${list(inh,'No guests in house.')}</div></div>`},
+Rooms(){return`<div class="top"><h2>Room inventory</h2><span class="mut">Live status for ${today()}</span></div><div class="rooms">${ROOMS.map(r=>{const s=roomState(r.n);const b=S.bk.find(x=>x.room==r.n&&x.status==='in');return`<div class="rm ${s}"><b>${r.n}</b><div>${r.type}</div><div class="mut">${inr(r.rate)} / night</div><div style="margin-top:6px;font-size:13px">${s==='occ'?esc(b.guest):s==='res'?'Arriving today':'Vacant'}</div></div>`}).join('')}</div>`},
+Bookings(){const q=S.q.toLowerCase();const L=S.bk.filter(b=>!q||(b.guest+b.room+b.email).toLowerCase().includes(q)).sort((a,b)=>b.in.localeCompare(a.in));
+return`<div class="top"><h2>Bookings</h2><div style="display:flex;gap:8px"><input id="q" placeholder="Search guest or room" value="${esc(S.q)}"><button class="p" id="nb">New booking</button></div></div><div class="box tw"><table><tr><th>Guest</th><th>Room</th><th>Stay</th><th>Status</th><th>Balance</th><th></th></tr>${L.map(b=>`<tr><td><b>${esc(b.guest)}</b><div class="mut">${esc(b.phone)}</div></td><td>${b.room}</td><td>${b.in} to ${b.out}</td><td>${pill(b.status)}</td><td>${b.status==='cancelled'?'-':inr(bal(b))}</td><td>${btns(b)}</td></tr>`).join('')||'<tr><td colspan="6" class="mut">No bookings match.</td></tr>'}</table></div>`},
+Guests(){const m={};S.bk.forEach(b=>{const k=b.email||b.guest;(m[k]=m[k]||{n:b.guest,e:b.email,p:b.phone,s:0,sp:0,l:''});if(b.status!=='cancelled'){m[k].s++;m[k].sp+=b.paid;if(b.in>m[k].l)m[k].l=b.in}});
+return`<div class="top"><h2>Guests</h2></div><div class="box tw"><table><tr><th>Name</th><th>Contact</th><th>Stays</th><th>Last stay</th><th>Total paid</th></tr>${Object.values(m).map(g=>`<tr><td><b>${esc(g.n)}</b></td><td>${esc(g.e)}<div class="mut">${esc(g.p)}</div></td><td>${g.s}</td><td>${g.l||'-'}</td><td>${inr(g.sp)}</td></tr>`).join('')}</table></div>`},
+Payments(){const L=S.bk.filter(b=>b.status!=='cancelled').sort((a,b)=>bal(b)-bal(a));
+return`<div class="top"><h2>Payments</h2></div><div class="box tw"><table><tr><th>Guest</th><th>Room</th><th>Total</th><th>Paid</th><th>Balance</th><th></th></tr>${L.map(b=>`<tr><td>${esc(b.guest)}</td><td>${b.room}</td><td>${inr(b.total)}</td><td>${inr(b.paid)}</td><td style="color:${bal(b)>0?'var(--wn)':'var(--ok)'}">${bal(b)>0?inr(bal(b)):'Settled'}</td><td>${bal(b)>0?`<button data-a="pay" data-id="${b.id}">Take payment</button>`:''}</td></tr>`).join('')}</table></div>`}};
+function act(a,id){const b=S.bk.find(x=>x.id===id);if(!b)return;
+if(a==='in'){if(b.in>today()){toast('This booking starts on '+b.in+'.');return}b.status='in';toast('Checked in to room '+b.room)}
+else if(a==='out'){if(bal(b)>0){toast('Settle the balance before check-out.');payDlg(b);return}b.status='out';toast('Checked out of room '+b.room)}
+else if(a==='cancel'){if(!confirm('Cancel this reservation?'))return;b.status='cancelled';toast('Reservation cancelled')}
+else if(a==='pay'){payDlg(b);return}
+save();render()}
+function payDlg(b){const d=$('#dlg');d.innerHTML=`<h3>Take payment</h3><p class="mut">${esc(b.guest)}, room ${b.room}. Balance ${inr(bal(b))}</p><label for="am">Amount</label><input id="am" type="number" min="1" max="${bal(b)}" value="${bal(b)}"><label for="md">Method</label><select id="md"><option>Card</option><option>UPI</option><option>Cash</option></select><div class="err" id="pe"></div><div class="acts"><button id="x">Close</button><button class="p" id="ok">Record payment</button></div>`;
+$('#x').onclick=()=>d.close();$('#ok').onclick=()=>{const v=+$('#am').value;if(!(v>0)||v>bal(b)){$('#pe').textContent='Enter an amount up to '+inr(bal(b))+'.';return}b.paid+=v;save();d.close();toast('Recorded '+inr(v));render()};d.showModal()}
+function bookDlg(){const d=$('#dlg');d.innerHTML=`<h3>New booking</h3><label for="g">Guest name</label><input id="g"><div class="g2"><div><label for="ph">Phone</label><input id="ph"></div><div><label for="em">Email</label><input id="em" type="email"></div></div><div class="g2"><div><label for="ci">Check-in</label><input id="ci" type="date" min="${today()}" value="${today()}"></div><div><label for="co">Check-out</label><input id="co" type="date" min="${add(1)}" value="${add(1)}"></div></div><label for="rm">Available room</label><select id="rm"></select><div class="mut" id="tot" style="margin-top:6px"></div><div class="err" id="be"></div><div class="acts"><button id="x">Close</button><button class="p" id="ok">Create booking</button></div>`;
+const fill=()=>{const a=$('#ci').value,b=$('#co').value,s=$('#rm');if(!a||!b||b<=a){s.innerHTML='';$('#be').textContent='Check-out must be after check-in.';$('#tot').textContent='';return}$('#be').textContent='';
+const av=ROOMS.filter(r=>free(r.n,a,b));s.innerHTML=av.length?av.map(r=>`<option value="${r.n}">${r.n} · ${r.type} · ${inr(r.rate)}</option>`).join(''):'<option value="">No rooms free for these dates</option>';upd()};
+const upd=()=>{const r=ROOMS.find(x=>x.n==$('#rm').value);$('#tot').textContent=r?`${nights($('#ci').value,$('#co').value)} night(s) · total ${inr(r.rate*nights($('#ci').value,$('#co').value))}`:''};
+['ci','co'].forEach(i=>$('#'+i).onchange=fill);$('#rm').onchange=upd;fill();
+$('#x').onclick=()=>d.close();
+$('#ok').onclick=()=>{const g=$('#g').value.trim(),a=$('#ci').value,b=$('#co').value,n=+$('#rm').value;
+if(!g){$('#be').textContent='Enter the guest’s name.';return}if(!n||b<=a){$('#be').textContent='Choose valid dates and an available room.';return}if(!free(n,a,b)){$('#be').textContent='That room was just taken. Pick another.';return}
+S.bk.push({id:Math.max(0,...S.bk.map(x=>x.id))+1,guest:g,phone:$('#ph').value.trim(),email:$('#em').value.trim(),room:n,in:a,out:b,status:'reserved',paid:0,total:ROOMS.find(r=>r.n===n).rate*nights(a,b)});save();d.close();toast('Booking created for room '+n);render()};d.showModal()}
+load();render();
+</script></body></html>
