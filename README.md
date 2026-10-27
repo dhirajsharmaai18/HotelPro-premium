@@ -1,4 +1,4 @@
-# HotelPro
+# HotelPro-premium
 
 A hotel management system for handling reservations, room inventory, guest records and payments from one screen. This version is a front-end prototype that runs entirely in the browser; a secure, scalable backend is the planned next step (see [Roadmap](#roadmap)).
 
